@@ -1,0 +1,68 @@
+
+.job-card.data-v-0b59c612 {
+  background-color: #fff;
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.card-header.data-v-0b59c612 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.job-title.data-v-0b59c612 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+.salary.data-v-0b59c612 {
+  font-size: 32rpx;
+  color: #ff6b35;
+  font-weight: bold;
+}
+.company-info.data-v-0b59c612 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.company-name.data-v-0b59c612 {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+.company-tag.data-v-0b59c612 {
+  font-size: 24rpx;
+  color: #999;
+  background-color: #f5f5f5;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+.job-tags.data-v-0b59c612 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+.tag.data-v-0b59c612 {
+  font-size: 24rpx;
+  color: #007aff;
+  background-color: rgba(0, 122, 255, 0.1);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}
+.card-footer.data-v-0b59c612 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+.location.data-v-0b59c612,
+.time.data-v-0b59c612 {
+  font-size: 24rpx;
+  color: #999;
+}

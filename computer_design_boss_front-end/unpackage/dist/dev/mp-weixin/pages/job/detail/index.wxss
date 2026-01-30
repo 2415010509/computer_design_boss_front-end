@@ -1,0 +1,48 @@
+
+.job-detail-page {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+.job-header {
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+.job-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 15rpx;
+}
+.job-salary {
+  font-size: 32rpx;
+  color: #ff6b35;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.job-requirements {
+  display: flex;
+  gap: 30rpx;
+}
+.req-item {
+  font-size: 28rpx;
+  color: #666;
+}
+.job-section {
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 45rpx;
+}
