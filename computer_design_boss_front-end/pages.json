@@ -1,53 +1,59 @@
 {
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/index/index_index",
       "style": {
         "navigationBarTitleText": "职位首页"
       }
     },
     {
-      "path": "pages/job/list/index",
+      "path": "pages/job/list/job_list_index",
       "style": {
         "navigationBarTitleText": "职位列表"
       }
     },
     {
-      "path": "pages/job/detail/index",
+      "path": "pages/job/detail/job_detail_index",
       "style": {
         "navigationBarTitleText": "职位详情"
       }
     },
     {
-      "path": "pages/user/index",
+      "path": "pages/job/add/job_add_index",
+      "style": {
+        "navigationBarTitleText": "发布职位"
+      }
+    },
+    {
+      "path": "pages/user/user_index",
       "style": {
         "navigationBarTitleText": "个人中心"
       }
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "职位招聘",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+      "navigationBarTextStyle": "black",
+      "navigationBarTitleText": "职位招聘",
+      "navigationBarBackgroundColor": "#F8F8F8",
+      "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "color": "#999",
-    "selectedColor": "#007AFF",
-    "backgroundColor": "#fff",
-    "list": [
+      "color": "#999",
+      "selectedColor": "#007AFF",
+      "backgroundColor": "#fff",
+      "list":[
       {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-active.png"
+      "pagePath": "pages/index/index_index",
+      "text": "首页",
+      "iconPath": "/static/tabbar/home.png",
+      "selectedIconPath": "/static/tabbar/home-active.png"
       },
       {
-        "pagePath": "pages/user/index",
-        "text": "我的",
-        "iconPath": "static/tabbar/user.png",
-        "selectedIconPath": "static/tabbar/user-active.png"
+      "pagePath": "pages/user/user_index",
+      "text": "我的",
+      "iconPath": "/static/tabbar/user.png",
+      "selectedIconPath": "/static/tabbar/user-active.png"
       }
     ]
-  }
+	}
 }

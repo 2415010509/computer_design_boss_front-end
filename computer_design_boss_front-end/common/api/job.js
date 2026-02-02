@@ -15,7 +15,7 @@ export const jobApi = {
     return request({
       url: '/job/job_lis_one_type',
       method: 'POST',
-      data: { category_id: categoryId }
+      data: { category_id: categoryId.toString() }
     })
   },
   
@@ -24,7 +24,7 @@ export const jobApi = {
     return request({
       url: '/job/job_list_two_given',
       method: 'POST',
-      data: { category_id: categoryId, emp_type: empType }
+      data: { category_id: categoryId.toString(), emp_type: empType.toString() }
     })
   },
   
@@ -43,6 +43,23 @@ export const jobApi = {
       url: '/job/job_details',
       method: 'POST',
       data: { id: jobId }
+    })
+  },
+  
+  // 获取职位分类列表
+  getJobCategories: () => {
+    return request({
+      url: '/job_intro/job_intro_list',
+      method: 'GET'
+    })
+  },
+  
+  // 发布新职位
+  addJob: (jobData) => {
+    return request({
+      url: '/job/job_add',
+      method: 'POST',
+      data: jobData
     })
   }
 }

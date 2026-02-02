@@ -11,13 +11,15 @@ const _sfc_main = {
   methods: {
     formatSalary(min, max) {
       if (min && max) {
-        return `${(min / 1e3).toFixed(0)}-${(max / 1e3).toFixed(0)}K`;
+        const minNum = typeof min === "number" ? min : parseFloat(min);
+        const maxNum = typeof max === "number" ? max : parseFloat(max);
+        return `${(minNum / 1e3).toFixed(0)}-${(maxNum / 1e3).toFixed(0)}K`;
       }
       return "\u85AA\u8D44\u9762\u8BAE";
     },
     goToDetail(data) {
       common_vendor.index.navigateTo({
-        url: `/pages/job/detail/index?id=${data.id}`
+        url: `/pages/job/detail/job_detail_index?id=${data.id}`
       });
     },
     getCompanyName(data) {
@@ -50,8 +52,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }),
     g: common_vendor.t($props.data.city_name || "\u57CE\u5E02"),
-    h: common_vendor.o(($event) => _ctx.$emit("click", $props.data))
+    h: common_vendor.o(($event) => $options.goToDetail($props.data))
   };
 }
-var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0b59c612"], ["__file", "D:/.aboss/computer_design_boss/computer_design_boss_front-end/component/job/job-card.vue"]]);
+var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0b59c612"], ["__file", "D:/.aboss_init(\u672C\u5730)/computer_design_boss_front-end/component/job/job-card.vue"]]);
 wx.createComponent(Component);

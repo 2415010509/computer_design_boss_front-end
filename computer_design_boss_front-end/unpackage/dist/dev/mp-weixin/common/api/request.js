@@ -29,12 +29,23 @@ const request = (options) => {
       }, options.header),
       success: (res) => {
         if (res.statusCode === 200) {
-          resolve(res.data);
+          const data = res.data;
+          if (data && typeof data === "object" && "code" in data && "data" in data) {
+            if (data.code === 200) {
+              resolve(data.data);
+            } else {
+              reject(data);
+            }
+          } else {
+            resolve(data);
+          }
         } else {
-          reject(res.data);
+          console.error("HTTP\u8BF7\u6C42\u5931\u8D25:", res.statusCode, res.errMsg);
+          reject(res.data || { error: `HTTP Error ${res.statusCode}` });
         }
       },
       fail: (err) => {
+        console.error("\u7F51\u7EDC\u8BF7\u6C42\u5931\u8D25:", err);
         reject(err);
       }
     });

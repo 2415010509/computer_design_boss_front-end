@@ -1,10 +1,13 @@
 
 .job-card.data-v-0b59c612 {
   background-color: #fff;
-  margin: 20rpx;
+  margin: 10rpx 0;
   padding: 30rpx;
   border-radius: 16rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  /* 防止卡片内容被分割到不同列 */
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 .card-header.data-v-0b59c612 {
   display: flex;

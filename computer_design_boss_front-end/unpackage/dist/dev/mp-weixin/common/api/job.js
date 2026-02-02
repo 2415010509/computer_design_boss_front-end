@@ -11,14 +11,14 @@ const jobApi = {
     return common_api_request.request({
       url: "/job/job_lis_one_type",
       method: "POST",
-      data: { category_id: categoryId }
+      data: { category_id: categoryId.toString() }
     });
   },
   getJobsByCategoryAndType: (categoryId, empType) => {
     return common_api_request.request({
       url: "/job/job_list_two_given",
       method: "POST",
-      data: { category_id: categoryId, emp_type: empType }
+      data: { category_id: categoryId.toString(), emp_type: empType.toString() }
     });
   },
   searchJobs: (keyword) => {
@@ -33,6 +33,19 @@ const jobApi = {
       url: "/job/job_details",
       method: "POST",
       data: { id: jobId }
+    });
+  },
+  getJobCategories: () => {
+    return common_api_request.request({
+      url: "/job_intro/job_intro_list",
+      method: "GET"
+    });
+  },
+  addJob: (jobData) => {
+    return common_api_request.request({
+      url: "/job/job_add",
+      method: "POST",
+      data: jobData
     });
   }
 };

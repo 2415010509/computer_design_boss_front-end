@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/job/list/index",
-    "pages/job/detail/index",
-    "pages/user/index"
+    "pages/index/index_index",
+    "pages/job/list/job_list_index",
+    "pages/job/detail/job_detail_index",
+    "pages/job/add/job_add_index",
+    "pages/user/user_index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -17,16 +18,16 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/index/index_index",
         "text": "首页",
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-active.png"
+        "iconPath": "/static/tabbar/home.png",
+        "selectedIconPath": "/static/tabbar/home-active.png"
       },
       {
-        "pagePath": "pages/user/index",
+        "pagePath": "pages/user/user_index",
         "text": "我的",
-        "iconPath": "static/tabbar/user.png",
-        "selectedIconPath": "static/tabbar/user-active.png"
+        "iconPath": "/static/tabbar/user.png",
+        "selectedIconPath": "/static/tabbar/user-active.png"
       }
     ]
   },

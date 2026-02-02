@@ -1,8 +1,8 @@
 <template>
-  <view class="job-card" @click="goToDetail(job)">
+  <view class="job-card" @click="goToDetail(data)">
     <view class="card-header">
-      <text class="job-title">{{ job.title }}</text>
-      <text class="salary">{{ formatSalary(job.salary_min, job.salary_max) }}</text>
+      <text class="job-title">{{ data.title }}</text>
+      <text class="salary">{{ formatSalary(data.salary_min, data.salary_max) }}</text>
     </view>
     
     <view class="company-info">
@@ -25,7 +25,7 @@
 export default {
   name: 'JobCard',
   props: {
-    job: {
+    data: {
       type: Object,
       default: () => ({})
     }
@@ -34,13 +34,16 @@ export default {
     // 格式化薪资
     formatSalary(min, max) {
       if (min && max) {
-        return `${(min/1000).toFixed(0)}-${(max/1000).toFixed(0)}K`
+        // 处理后端返回的Decimal类型数据，转换为数字
+        const minNum = typeof min === 'number' ? min : parseFloat(min)
+        const maxNum = typeof max === 'number' ? max : parseFloat(max)
+        return `${(minNum/1000).toFixed(0)}-${(maxNum/1000).toFixed(0)}K`
       }
       return '薪资面议'
     },
     goToDetail(data) {
 	  uni.navigateTo({
-		url: `/pages/job/detail/index?id=${data.id}`
+		url: `/pages/job/detail/job_detail_index?id=${data.id}`
 	  })
 	},
     // 获取公司名称
@@ -70,10 +73,14 @@ export default {
 <style scoped>
 .job-card {
   background-color: #fff;
-  margin: 20rpx;
+  margin: 10rpx 0;
   padding: 30rpx;
   border-radius: 16rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  /* 防止卡片内容被分割到不同列 */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .card-header {
