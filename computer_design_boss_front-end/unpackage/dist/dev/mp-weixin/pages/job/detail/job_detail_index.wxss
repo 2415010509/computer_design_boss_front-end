@@ -51,122 +51,42 @@
   font-size: 28rpx;
   color: #666;
   line-height: 45rpx;
-}
-
-/* 评论输入区域 */
-.comment-input-section {
+}/* 任职要求列表 */
+.requirement-item {
   display: flex;
-  align-items: center;
-  margin-bottom: 30rpx;
-  padding-bottom: 20rpx;
-  border-bottom: 1rpx solid #eee;
-}
-.comment-input-section input {
-  flex: 1;
-  padding: 15rpx 20rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 30rpx;
-  font-size: 26rpx;
-  background-color: #f9f9f9;
-}
-.send-btn {
-  margin-left: 20rpx;
-  padding: 15rpx 30rpx;
-  background-color: #007aff;
-  color: #fff;
-  border-radius: 30rpx;
-  font-size: 26rpx;
-}
-
-/* 评论列表 */
-.comment-list {
-  margin-bottom: 20rpx;
-}
-.comment-item {
-  margin-bottom: 30rpx;
-  padding: 20rpx;
-  background-color: #f9f9f9;
-  border-radius: 10rpx;
-}
-.comment-content {
-  font-size: 28rpx;
-  color: #333;
-  margin-bottom: 15rpx;
-  display: block;
-}
-.comment-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.comment-time {
-  font-size: 22rpx;
-  color: #999;
-}
-.reply-btn {
-  font-size: 24rpx;
-  color: #007aff;
-}
-
-/* 回复列表 */
-.reply-list {
-  margin-top: 20rpx;
-  padding-left: 30rpx;
-  border-left: 2rpx solid #ddd;
-}
-.reply-item {
-  margin-bottom: 15rpx;
-  padding: 15rpx;
-  background-color: #fff;
-  border-radius: 8rpx;
-}
-.reply-content {
-  font-size: 26rpx;
-  color: #666;
   margin-bottom: 10rpx;
-  display: block;
+  align-items: flex-start;
 }
-.reply-footer {
-  display: flex;
-  justify-content: flex-end;
+.requirement-number {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10rpx;
+  min-width: 30rpx;
 }
-.reply-time {
-  font-size: 20rpx;
-  color: #999;
-}
-
-/* 回复输入框 */
-.reply-input-section {
-  display: flex;
-  align-items: center;
-  margin-top: 20rpx;
-  padding-top: 20rpx;
-  border-top: 1rpx dashed #ddd;
-}
-.reply-input-section input {
+.requirement-text {
   flex: 1;
-  padding: 12rpx 15rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 25rpx;
-  font-size: 24rpx;
-  background-color: #fff;
-}
-.reply-input-section .send-btn {
-  margin-left: 15rpx;
-  padding: 12rpx 25rpx;
-  font-size: 24rpx;
-}
-.cancel-btn {
-  margin-left: 15rpx;
-  padding: 12rpx 25rpx;
-  color: #999;
-  font-size: 24rpx;
+  text-align: justify;
 }
 
-/* 空状态 */
-.empty-comments {
-  text-align: center;
-  padding: 50rpx 0;
-  color: #999;
-  font-size: 28rpx;
+/* 福利待遇列表 */
+.welfare-item {
+  display: flex;
+  margin-bottom: 10rpx;
+  align-items: flex-start;
 }
+.welfare-icon {
+  color: #007aff;
+  margin-right: 10rpx;
+  min-width: 20rpx;
+}
+.welfare-text {
+  flex: 1;
+  text-align: justify;
+}
+
+/* 评论计数（已保留但不显示） */
+.comment-count {
+  display: none;
+}
+
+
