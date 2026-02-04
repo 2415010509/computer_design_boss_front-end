@@ -6,12 +6,7 @@
         "navigationBarTitleText": "职位首页"
       }
     },
-    {
-      "path": "pages/job/list/job_list_index",
-      "style": {
-        "navigationBarTitleText": "职位列表"
-      }
-    },
+
     {
       "path": "pages/job/detail/job_detail_index",
       "style": {

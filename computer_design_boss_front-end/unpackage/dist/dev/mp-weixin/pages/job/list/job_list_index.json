@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "职位列表",
-  "usingComponents": {
-    "job-card": "../../../component/job/job-card"
-  }
-}

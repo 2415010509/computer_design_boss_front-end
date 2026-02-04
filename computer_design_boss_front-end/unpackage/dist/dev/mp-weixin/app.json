@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index_index",
-    "pages/job/list/job_list_index",
     "pages/job/detail/job_detail_index",
     "pages/job/add/job_add_index",
     "pages/user/user_index"

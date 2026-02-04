@@ -4,7 +4,6 @@ exports[Symbol.toStringTag] = "Module";
 var common_vendor = require("./common/vendor.js");
 if (!Math) {
   "./pages/index/index_index.js";
-  "./pages/job/list/job_list_index.js";
   "./pages/job/detail/job_detail_index.js";
   "./pages/job/add/job_add_index.js";
   "./pages/user/user_index.js";

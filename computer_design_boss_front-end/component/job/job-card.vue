@@ -6,7 +6,7 @@
     </view>
     
     <view class="company-info">
-      <text class="company-name">{{ getCompanyName(data) }}</text>
+      <text class="company-name">{{ data.company || '未知公司' }}</text>
       <text class="company-tag">{{ data.exp_req || '经验不限' }} | {{ data.edu_req || '学历不限' }}</text>
     </view>
     
@@ -15,8 +15,8 @@
     </view>
     
     <view class="card-footer">
-      <text class="location">{{ data.city_name || '城市' }}</text>
-      <text class="time">今天</text>
+      <text class="location">{{ data.city || '城市' }}</text>
+      <text class="time">{{ formatTime(data.publish_time) }}</text>
     </view>
   </view>
 </template>
@@ -65,6 +65,39 @@ export default {
       }
       // 默认标签
       return ['五险一金', '弹性工作', '带薪年假']
+    },
+    
+    // 格式化发布时间
+    formatTime(publishTime) {
+      if (!publishTime) return '今天'
+      
+      try {
+        const date = new Date(publishTime)
+        const now = new Date()
+        
+        // 计算时间差（毫秒）
+        const diff = now - date
+        
+        // 计算天数差
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+        
+        if (days === 0) {
+          return '今天'
+        } else if (days === 1) {
+          return '昨天'
+        } else if (days < 7) {
+          return `${days}天前`
+        } else {
+          // 格式化日期为 YYYY-MM-DD
+          const year = date.getFullYear()
+          const month = String(date.getMonth() + 1).padStart(2, '0')
+          const day = String(date.getDate()).padStart(2, '0')
+          return `${year}-${month}-${day}`
+        }
+      } catch (error) {
+        console.error('日期格式化失败:', error)
+        return '今天'
+      }
     }
   }
 }
