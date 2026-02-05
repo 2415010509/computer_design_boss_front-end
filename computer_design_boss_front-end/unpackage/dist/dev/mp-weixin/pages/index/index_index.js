@@ -66,13 +66,11 @@ const _sfc_main = {
   methods: {
     async getRecommendJobs() {
       try {
-        console.log("\u5F00\u59CB\u8BF7\u6C42\u63A8\u8350\u804C\u4F4D...");
         const networkType = await new Promise((resolve) => {
           common_vendor.index.getNetworkType({
             success: (res2) => resolve(res2.networkType)
           });
         });
-        console.log("\u5F53\u524D\u7F51\u7EDC\u72B6\u6001:", networkType);
         if (networkType === "none") {
           common_vendor.index.showToast({
             title: "\u5F53\u524D\u65E0\u7F51\u7EDC\u8FDE\u63A5",
@@ -81,52 +79,18 @@ const _sfc_main = {
           return;
         }
         const res = await common_api_job.jobApi.getAllJobs();
-        console.log("\u540E\u7AEF\u8FD4\u56DE\u539F\u59CB\u6570\u636E:", res);
-        console.log("\u6570\u636E\u7C7B\u578B:", typeof res);
-        console.log("\u662F\u5426\u4E3A\u6570\u7EC4:", Array.isArray(res));
-        console.log("\u662F\u5426\u6709data\u5C5E\u6027:", res && "data" in res);
         let jobsData = [];
-        console.log("res\u7684\u503C:", res);
-        console.log("res\u7684\u7C7B\u578B:", typeof res);
-        console.log("res\u662F\u5426\u4E3Anull:", res === null);
-        console.log("res\u662F\u5426\u4E3Aundefined:", res === void 0);
         if (res !== null && res !== void 0) {
-          console.log("res\u6709\u503C\uFF0C\u5F00\u59CB\u5904\u7406...");
           if (Array.isArray(res)) {
             jobsData = res;
-            console.log("\u6210\u529F\u83B7\u53D6jobs\u6570\u636E\uFF0C\u957F\u5EA6:", res.length);
-            if (jobsData.length > 0) {
-              console.log("\u7B2C\u4E00\u6761\u6570\u636E\u7ED3\u6784:", jobsData[0]);
-              console.log("\u662F\u5426\u5305\u542Bcategory_id:", "category_id" in jobsData[0]);
-              console.log("category_id\u503C:", jobsData[0].category_id);
-            }
           } else if (typeof res === "object" && Object.keys(res).length > 0) {
             if (res.list && Array.isArray(res.list)) {
               jobsData = res.list;
-              console.log("\u4ECEres.list\u83B7\u53D6jobs\u6570\u636E\uFF0C\u957F\u5EA6:", res.list.length);
-              if (jobsData.length > 0) {
-                console.log("\u7B2C\u4E00\u6761\u6570\u636E\u7ED3\u6784:", jobsData[0]);
-                console.log("\u662F\u5426\u5305\u542Bcategory_id:", "category_id" in jobsData[0]);
-                console.log("category_id\u503C:", jobsData[0].category_id);
-              }
             } else if (res.data && Array.isArray(res.data)) {
               jobsData = res.data;
-              console.log("\u4ECEres.data\u83B7\u53D6jobs\u6570\u636E\uFF0C\u957F\u5EA6:", res.data.length);
-              if (jobsData.length > 0) {
-                console.log("\u7B2C\u4E00\u6761\u6570\u636E\u7ED3\u6784:", jobsData[0]);
-                console.log("\u662F\u5426\u5305\u542Bcategory_id:", "category_id" in jobsData[0]);
-                console.log("category_id\u503C:", jobsData[0].category_id);
-              }
             } else if (res.jobs && Array.isArray(res.jobs)) {
               jobsData = res.jobs;
-              console.log("\u4ECEres.jobs\u83B7\u53D6jobs\u6570\u636E\uFF0C\u957F\u5EA6:", res.jobs.length);
-              if (jobsData.length > 0) {
-                console.log("\u7B2C\u4E00\u6761\u6570\u636E\u7ED3\u6784:", jobsData[0]);
-                console.log("\u662F\u5426\u5305\u542Bcategory_id:", "category_id" in jobsData[0]);
-                console.log("category_id\u503C:", jobsData[0].category_id);
-              }
             } else {
-              console.error("\u83B7\u53D6\u63A8\u8350\u804C\u4F4D\u5931\u8D25: \u65E0\u6CD5\u63D0\u53D6\u6709\u6548\u6570\u636E", res);
               common_vendor.index.showToast({
                 title: "\u83B7\u53D6\u63A8\u8350\u804C\u4F4D\u5931\u8D25: \u6570\u636E\u683C\u5F0F\u9519\u8BEF",
                 icon: "none"
@@ -134,7 +98,6 @@ const _sfc_main = {
               jobsData = [];
             }
           } else {
-            console.error("\u83B7\u53D6\u63A8\u8350\u804C\u4F4D\u5931\u8D25: \u65E0\u6548\u6570\u636E\u683C\u5F0F", res);
             common_vendor.index.showToast({
               title: "\u83B7\u53D6\u63A8\u8350\u804C\u4F4D\u5931\u8D25: \u6570\u636E\u683C\u5F0F\u9519\u8BEF",
               icon: "none"
@@ -142,7 +105,6 @@ const _sfc_main = {
             jobsData = [];
           }
         } else {
-          console.log("\u540E\u7AEF\u8FD4\u56DE\u7A7A\u6570\u636E");
           common_vendor.index.showToast({
             title: "\u83B7\u53D6\u63A8\u8350\u804C\u4F4D\u5931\u8D25: \u540E\u7AEF\u65E0\u6570\u636E\u8FD4\u56DE",
             icon: "none"
@@ -190,25 +152,10 @@ const _sfc_main = {
       }
     },
     goToCategory(categoryId) {
-      console.log("=== \u70B9\u51FB\u5206\u7C7B\u5F00\u59CB ===");
-      console.log("\u70B9\u51FB\u7684\u5206\u7C7BID:", categoryId);
-      console.log("\u70B9\u51FB\u7684\u5206\u7C7BID\u7C7B\u578B:", typeof categoryId);
       this.currentCategory = categoryId;
-      console.log("\u8BBE\u7F6E\u540E\u7684currentCategory:", this.currentCategory);
-      console.log("\u8BBE\u7F6E\u540E\u7684currentCategory\u7C7B\u578B:", typeof this.currentCategory);
-      console.log("\u68C0\u67E5\u662F\u5426\u4E3A\u6280\u672F\u5F00\u53D1\u7C7B:");
-      console.log('categoryId === "100":', categoryId === "100");
-      console.log("categoryId === 100:", categoryId === 100);
       if (categoryId === "100" || categoryId === 100) {
         this.showCategoryTabs = true;
-        console.log("\u83B7\u53D6\u6280\u672F\u5F00\u53D1\u7684\u5B50\u5206\u7C7B:");
-        this.subCategoryList = this.allCategories.filter((category) => {
-          const parentId = category.parent_id;
-          const isMatch = parentId && (parentId.toString() === "100" || parentId === 100);
-          console.log("\u5206\u7C7B:", category.name, "parent_id:", parentId, "\u7C7B\u578B:", typeof parentId, "\u662F\u5426\u5339\u914D:", isMatch);
-          return isMatch;
-        });
-        console.log("\u83B7\u53D6\u5230\u7684\u5B50\u5206\u7C7B\u6570\u91CF:", this.subCategoryList.length);
+        this.subCategoryList = this.allCategories.filter((category) => category.parent_id && (category.parent_id.toString() === "100" || category.parent_id === 100));
       } else {
         this.showCategoryTabs = false;
         this.subCategoryList = [];
@@ -216,13 +163,7 @@ const _sfc_main = {
       this.selectedSubCategories = [];
       this.selectedEmpType = 0;
       this.keyword = "";
-      console.log("\u91CD\u7F6E\u540E\u7684\u7B5B\u9009\u6761\u4EF6:");
-      console.log("selectedSubCategories:", this.selectedSubCategories);
-      console.log("selectedEmpType:", this.selectedEmpType);
-      console.log("keyword:", this.keyword);
-      console.log("\u51C6\u5907\u5E94\u7528\u7B5B\u9009...");
       this.applyFilters();
-      console.log("=== \u70B9\u51FB\u5206\u7C7B\u7ED3\u675F ===");
     },
     selectSubCategory(categoryId) {
       const numCategoryId = Number(categoryId);
@@ -243,83 +184,22 @@ const _sfc_main = {
       this.applyFilters();
     },
     applyFilters() {
-      console.log("=== \u5E94\u7528\u7B5B\u9009\u5F00\u59CB ===");
-      console.log("\u5F53\u524D\u5206\u7C7B:", this.currentCategory);
-      console.log("\u5F53\u524D\u5206\u7C7B\u7C7B\u578B:", typeof this.currentCategory);
-      console.log("\u5168\u90E8\u804C\u4F4D\u6570:", this.allJobs.length);
-      console.log("\u524D3\u4E2A\u804C\u4F4D\u4FE1\u606F:");
-      for (let i = 0; i < Math.min(3, this.allJobs.length); i++) {
-        console.log(`\u804C\u4F4D${i + 1}:`, this.allJobs[i].title, "\u5206\u7C7BID:", this.allJobs[i].category_id, "\u7C7B\u578B:", typeof this.allJobs[i].category_id);
-      }
       let filteredJobs = [...this.allJobs];
-      console.log("\u7B5B\u9009\u524D\u804C\u4F4D\u6570:", filteredJobs.length);
       if (this.currentCategory) {
-        console.log("=== \u5206\u7C7B\u7B5B\u9009\u5F00\u59CB ===");
-        console.log("\u5F53\u524D\u5206\u7C7BID:", this.currentCategory);
-        console.log("\u5F53\u524D\u5206\u7C7BID\u7C7B\u578B:", typeof this.currentCategory);
-        console.log("\u7B5B\u9009\u524D\u804C\u4F4D\u603B\u6570:", filteredJobs.length);
         const currentCatNum = Number(this.currentCategory);
-        const matchedJobs = [];
         filteredJobs = filteredJobs.filter((job) => {
           if (!job || job.category_id === null) {
-            console.log("\u8DF3\u8FC7\u65E0\u6548\u804C\u4F4D\u6570\u636E:", job);
             return false;
           }
           const jobCategoryId = job.category_id;
-          console.log("\u804C\u4F4D:", job.title, "\u5206\u7C7BID:", jobCategoryId, "\u7C7B\u578B:", typeof jobCategoryId);
           if (currentCatNum === 100 && this.selectedSubCategories.length > 0) {
-            console.log("\u5B50\u5206\u7C7B\u7B5B\u9009\u6761\u4EF6:", this.selectedSubCategories);
-            const isMatch = this.selectedSubCategories.includes(jobCategoryId);
-            console.log("\u5B50\u5206\u7C7B\u5339\u914D\u7ED3\u679C:", isMatch);
-            if (isMatch) {
-              matchedJobs.push(job);
-            }
-            return isMatch;
+            return this.selectedSubCategories.includes(jobCategoryId);
           } else {
             const jobCatStr = jobCategoryId.toString();
             const currentCatStr = this.currentCategory.toString();
-            console.log("=== \u5355\u4E2A\u804C\u4F4D\u6BD4\u8F83 ===");
-            console.log("\u804C\u4F4D\u6807\u9898:", job.title);
-            console.log("\u804C\u4F4D\u5206\u7C7BID:", jobCategoryId, "\u7C7B\u578B:", typeof jobCategoryId);
-            console.log("\u5F53\u524D\u5206\u7C7BID:", this.currentCategory, "\u7C7B\u578B:", typeof this.currentCategory);
-            console.log("\u8F6C\u6362\u540E\u7684\u5F53\u524D\u5206\u7C7BID:", currentCatNum, "\u7C7B\u578B:", typeof currentCatNum);
-            console.log("\u804C\u4F4D\u5206\u7C7B\u5B57\u7B26\u4E32:", jobCatStr, "\u957F\u5EA6:", jobCatStr.length);
-            console.log("\u5F53\u524D\u5206\u7C7B\u5B57\u7B26\u4E32:", currentCatStr, "\u957F\u5EA6:", currentCatStr.length);
-            console.log("\u5B57\u7B26\u4E32\u6BD4\u8F83:", jobCatStr, "startsWith", currentCatStr);
-            console.log("\u6BD4\u8F83\u7ED3\u679C:", jobCatStr.startsWith(currentCatStr));
-            const exactMatch = jobCategoryId === currentCatNum;
-            const startsWithMatch = jobCatStr.startsWith(currentCatStr);
-            console.log("=== \u5339\u914D\u7ED3\u679C\u5206\u6790 ===");
-            console.log("jobCategoryId:", jobCategoryId, "\u7C7B\u578B:", typeof jobCategoryId);
-            console.log("currentCatNum:", currentCatNum, "\u7C7B\u578B:", typeof currentCatNum);
-            console.log("\u5B8C\u5168\u5339\u914D\u6761\u4EF6:", `${jobCategoryId} === ${currentCatNum}`);
-            console.log("\u5B8C\u5168\u5339\u914D\u7ED3\u679C:", exactMatch);
-            console.log("jobCatStr:", jobCatStr, "\u957F\u5EA6:", jobCatStr.length);
-            console.log("currentCatStr:", currentCatStr, "\u957F\u5EA6:", currentCatStr.length);
-            console.log("\u524D\u7F00\u5339\u914D\u6761\u4EF6:", `${jobCatStr}.startsWith(${currentCatStr})`);
-            console.log("\u524D\u7F00\u5339\u914D\u7ED3\u679C:", startsWithMatch);
-            const isMatch = exactMatch || startsWithMatch;
-            console.log("\u6700\u7EC8\u5339\u914D\u7ED3\u679C:", isMatch);
-            if (!isMatch) {
-              console.log("=== \u4E0D\u5339\u914D\u539F\u56E0\u5206\u6790 ===");
-              console.log("jobCategoryId\u548CcurrentCatNum\u662F\u5426\u76F8\u7B49:", jobCategoryId === currentCatNum);
-              console.log("jobCatStr\u662F\u5426\u4EE5currentCatStr\u5F00\u5934:", jobCatStr.startsWith(currentCatStr));
-              console.log("jobCatStr.substring(0, currentCatStr.length):", jobCatStr.substring(0, currentCatStr.length));
-              console.log("currentCatStr:", currentCatStr);
-              console.log("\u4E24\u4E2A\u5B57\u7B26\u4E32\u662F\u5426\u76F8\u7B49:", jobCatStr.substring(0, currentCatStr.length) === currentCatStr);
-            }
-            if (isMatch) {
-              matchedJobs.push(job);
-              console.log("\u6DFB\u52A0\u5230\u5339\u914D\u5217\u8868");
-            } else {
-              console.log("\u672A\u5339\u914D");
-            }
-            return isMatch;
+            return jobCategoryId === currentCatNum || jobCatStr.startsWith(currentCatStr);
           }
         });
-        console.log("\u5339\u914D\u7684\u804C\u4F4D\u5217\u8868:", matchedJobs);
-        console.log("\u5206\u7C7B\u7B5B\u9009\u540E\u804C\u4F4D\u6570:", filteredJobs.length);
-        console.log("=== \u5206\u7C7B\u7B5B\u9009\u7ED3\u675F ===");
       }
       console.log("=== \u5E94\u7528\u5C31\u4E1A\u7C7B\u578B\u7B5B\u9009 ===");
       console.log("\u5F53\u524D\u5C31\u4E1A\u7C7B\u578B\u7B5B\u9009:", this.selectedEmpType);

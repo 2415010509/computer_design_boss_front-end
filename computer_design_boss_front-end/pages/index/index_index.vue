@@ -119,15 +119,12 @@ export default {
   methods: {
     async getRecommendJobs() {
       try {
-        console.log('开始请求推荐职位...')
-        
         // 检查网络状态
         const networkType = await new Promise((resolve) => {
           uni.getNetworkType({
             success: (res) => resolve(res.networkType)
           })
         })
-        console.log('当前网络状态:', networkType)
         
         if (networkType === 'none') {
           uni.showToast({
@@ -139,63 +136,22 @@ export default {
         
         const res = await jobApi.getAllJobs()
         
-        // 打印原始数据用于调试
-        console.log('后端返回原始数据:', res)
-        console.log('数据类型:', typeof res)
-        console.log('是否为数组:', Array.isArray(res))
-        console.log('是否有data属性:', res && 'data' in res)
-        
         let jobsData = []
         
-        // 检查后端返回的数据
-        console.log('res的值:', res)
-        console.log('res的类型:', typeof res)
-        console.log('res是否为null:', res === null)
-        console.log('res是否为undefined:', res === undefined)
-        
         if (res !== null && res !== undefined) {
-            console.log('res有值，开始处理...')
             if (Array.isArray(res)) {
                 // 如果是数组，直接使用
                 jobsData = res
-                console.log('成功获取jobs数据，长度:', res.length)
-                
-                // 检查返回的数据结构
-                if (jobsData.length > 0) {
-                    console.log('第一条数据结构:', jobsData[0])
-                    console.log('是否包含category_id:', 'category_id' in jobsData[0])
-                    console.log('category_id值:', jobsData[0].category_id)
-                }
             } else if (typeof res === 'object' && Object.keys(res).length > 0) {
                 // 如果是对象，尝试提取其中的数组数据
-                // 检查是否有类似'list'、'data'、'jobs'等字段
                 if (res.list && Array.isArray(res.list)) {
                     jobsData = res.list
-                    console.log('从res.list获取jobs数据，长度:', res.list.length)
-                    if (jobsData.length > 0) {
-                        console.log('第一条数据结构:', jobsData[0])
-                        console.log('是否包含category_id:', 'category_id' in jobsData[0])
-                        console.log('category_id值:', jobsData[0].category_id)
-                    }
                 } else if (res.data && Array.isArray(res.data)) {
                     jobsData = res.data
-                    console.log('从res.data获取jobs数据，长度:', res.data.length)
-                    if (jobsData.length > 0) {
-                        console.log('第一条数据结构:', jobsData[0])
-                        console.log('是否包含category_id:', 'category_id' in jobsData[0])
-                        console.log('category_id值:', jobsData[0].category_id)
-                    }
                 } else if (res.jobs && Array.isArray(res.jobs)) {
                     jobsData = res.jobs
-                    console.log('从res.jobs获取jobs数据，长度:', res.jobs.length)
-                    if (jobsData.length > 0) {
-                        console.log('第一条数据结构:', jobsData[0])
-                        console.log('是否包含category_id:', 'category_id' in jobsData[0])
-                        console.log('category_id值:', jobsData[0].category_id)
-                    }
                 } else {
                     // 如果无法提取数组数据，显示错误信息
-                    console.error('获取推荐职位失败: 无法提取有效数据', res)
                     uni.showToast({
                         title: '获取推荐职位失败: 数据格式错误',
                         icon: 'none'
@@ -204,7 +160,6 @@ export default {
                 }
             } else {
                 // 其他情况显示错误信息
-                console.error('获取推荐职位失败: 无效数据格式', res)
                 uni.showToast({
                     title: '获取推荐职位失败: 数据格式错误',
                     icon: 'none'
@@ -213,7 +168,6 @@ export default {
             }
         } else {
             // 没有数据返回，显示错误信息
-            console.log('后端返回空数据')
             uni.showToast({
                 title: '获取推荐职位失败: 后端无数据返回',
                 icon: 'none'
@@ -276,33 +230,15 @@ export default {
     },
     
     goToCategory(categoryId) {
-        // 添加详细调试信息
-        console.log('=== 点击分类开始 ===')
-        console.log('点击的分类ID:', categoryId)
-        console.log('点击的分类ID类型:', typeof categoryId)
-        
         this.currentCategory = categoryId
         
-        // 详细调试信息
-        console.log('设置后的currentCategory:', this.currentCategory)
-        console.log('设置后的currentCategory类型:', typeof this.currentCategory)
-        
         // 检查是否为技术开发类（ID为100）
-        console.log('检查是否为技术开发类:')
-        console.log('categoryId === "100":', categoryId === '100')
-        console.log('categoryId === 100:', categoryId === 100)
-        
         if (categoryId === '100' || categoryId === 100) {
             this.showCategoryTabs = true
             // 获取技术开发的子分类
-            console.log('获取技术开发的子分类:')
-            this.subCategoryList = this.allCategories.filter(category => {
-                const parentId = category.parent_id
-                const isMatch = parentId && (parentId.toString() === '100' || parentId === 100)
-                console.log('分类:', category.name, 'parent_id:', parentId, '类型:', typeof parentId, '是否匹配:', isMatch)
-                return isMatch
-            })
-            console.log('获取到的子分类数量:', this.subCategoryList.length)
+            this.subCategoryList = this.allCategories.filter(category => 
+                category.parent_id && (category.parent_id.toString() === '100' || category.parent_id === 100)
+            )
         } else {
             this.showCategoryTabs = false
             this.subCategoryList = []
@@ -313,15 +249,8 @@ export default {
         this.selectedEmpType = 0
         this.keyword = ''
         
-        console.log('重置后的筛选条件:')
-        console.log('selectedSubCategories:', this.selectedSubCategories)
-        console.log('selectedEmpType:', this.selectedEmpType)
-        console.log('keyword:', this.keyword)
-        
         // 应用筛选
-        console.log('准备应用筛选...')
         this.applyFilters()
-        console.log('=== 点击分类结束 ===')
     },
     
     // 选择子分类
@@ -356,59 +285,25 @@ export default {
     
     // 应用所有筛选条件
     applyFilters() {
-      // 添加详细调试信息
-      console.log('=== 应用筛选开始 ===')
-      console.log('当前分类:', this.currentCategory)
-      console.log('当前分类类型:', typeof this.currentCategory)
-      console.log('全部职位数:', this.allJobs.length)
-      
-      // 输出前几个职位的信息
-      console.log('前3个职位信息:')
-      for (let i = 0; i < Math.min(3, this.allJobs.length); i++) {
-          console.log(`职位${i+1}:`, this.allJobs[i].title, '分类ID:', this.allJobs[i].category_id, '类型:', typeof this.allJobs[i].category_id)
-      }
-      
       let filteredJobs = [...this.allJobs]
       
-      // 调试信息
-      console.log('筛选前职位数:', filteredJobs.length)
-      
       // 应用分类筛选
-    if (this.currentCategory) {
-        // 详细调试信息
-        console.log('=== 分类筛选开始 ===')
-        console.log('当前分类ID:', this.currentCategory)
-        console.log('当前分类ID类型:', typeof this.currentCategory)
-        console.log('筛选前职位总数:', filteredJobs.length)
-        
+      if (this.currentCategory) {
         // 将当前分类ID统一转换为数字类型进行比较
         const currentCatNum = Number(this.currentCategory)
-        
-        // 保存符合条件的职位
-        const matchedJobs = []
         
         filteredJobs = filteredJobs.filter(job => {
             // 确保job存在且有有效的category_id
             if (!job || job.category_id === null) {
-                console.log('跳过无效职位数据:', job)
                 return false
             }
             
             // 职位分类ID已经在getRecommendJobs中转换为数字
             const jobCategoryId = job.category_id
             
-            // 调试信息
-            console.log('职位:', job.title, '分类ID:', jobCategoryId, '类型:', typeof jobCategoryId)
-            
             // 如果选择了技术开发类且有子分类筛选
             if (currentCatNum === 100 && this.selectedSubCategories.length > 0) {
-                console.log('子分类筛选条件:', this.selectedSubCategories)
-                const isMatch = this.selectedSubCategories.includes(jobCategoryId)
-                console.log('子分类匹配结果:', isMatch)
-                if (isMatch) {
-                    matchedJobs.push(job)
-                }
-                return isMatch
+                return this.selectedSubCategories.includes(jobCategoryId)
             } else {
                 // 检查是否是大类ID或其子分类ID
                 // 对于大类ID（如100, 200, 300），直接匹配
@@ -416,59 +311,10 @@ export default {
                 const jobCatStr = jobCategoryId.toString()
                 const currentCatStr = this.currentCategory.toString()
                 
-                // 详细的比较信息
-                console.log('=== 单个职位比较 ===')
-                console.log('职位标题:', job.title)
-                console.log('职位分类ID:', jobCategoryId, '类型:', typeof jobCategoryId)
-                console.log('当前分类ID:', this.currentCategory, '类型:', typeof this.currentCategory)
-                console.log('转换后的当前分类ID:', currentCatNum, '类型:', typeof currentCatNum)
-                console.log('职位分类字符串:', jobCatStr, '长度:', jobCatStr.length)
-                console.log('当前分类字符串:', currentCatStr, '长度:', currentCatStr.length)
-                console.log('字符串比较:', jobCatStr, 'startsWith', currentCatStr)
-                console.log('比较结果:', jobCatStr.startsWith(currentCatStr))
-                
-                const exactMatch = jobCategoryId === currentCatNum
-                const startsWithMatch = jobCatStr.startsWith(currentCatStr)
-                
-                // 详细的匹配结果信息
-                console.log('=== 匹配结果分析 ===')
-                console.log('jobCategoryId:', jobCategoryId, '类型:', typeof jobCategoryId)
-                console.log('currentCatNum:', currentCatNum, '类型:', typeof currentCatNum)
-                console.log('完全匹配条件:', `${jobCategoryId} === ${currentCatNum}`)
-                console.log('完全匹配结果:', exactMatch)
-                
-                console.log('jobCatStr:', jobCatStr, '长度:', jobCatStr.length)
-                console.log('currentCatStr:', currentCatStr, '长度:', currentCatStr.length)
-                console.log('前缀匹配条件:', `${jobCatStr}.startsWith(${currentCatStr})`)
-                console.log('前缀匹配结果:', startsWithMatch)
-                
-                const isMatch = exactMatch || startsWithMatch
-                console.log('最终匹配结果:', isMatch)
-                
-                // 额外的调试信息
-                if (!isMatch) {
-                    console.log('=== 不匹配原因分析 ===')
-                    console.log('jobCategoryId和currentCatNum是否相等:', jobCategoryId === currentCatNum)
-                    console.log('jobCatStr是否以currentCatStr开头:', jobCatStr.startsWith(currentCatStr))
-                    console.log('jobCatStr.substring(0, currentCatStr.length):', jobCatStr.substring(0, currentCatStr.length))
-                    console.log('currentCatStr:', currentCatStr)
-                    console.log('两个字符串是否相等:', jobCatStr.substring(0, currentCatStr.length) === currentCatStr)
-                }
-                
-                if (isMatch) {
-                    matchedJobs.push(job)
-                    console.log('添加到匹配列表')
-                } else {
-                    console.log('未匹配')
-                }
-                return isMatch
+                return jobCategoryId === currentCatNum || jobCatStr.startsWith(currentCatStr)
             }
         })
-        
-        console.log('匹配的职位列表:', matchedJobs)
-        console.log('分类筛选后职位数:', filteredJobs.length)
-        console.log('=== 分类筛选结束 ===')
-    }
+      }
       
       // 应用就业类型筛选
       console.log('=== 应用就业类型筛选 ===')
